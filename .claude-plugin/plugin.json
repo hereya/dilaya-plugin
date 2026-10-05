@@ -8,7 +8,11 @@
     "url": "https://dilaya.eu/en"
   },
   "homepage": "https://dilaya.eu/en",
+  "repository": "https://github.com/hereya/dilaya-plugin",
+  "documentationUrl": "https://dilaya.eu/en/guide",
+  "supportUrl": "https://dilaya.eu/en/guide",
   "privacyPolicyUrl": "https://dilaya.eu/en/privacy",
+  "termsOfServiceUrl": "https://dilaya.eu/en/terms",
   "keywords": [
     "productivity",
     "custom-software",
