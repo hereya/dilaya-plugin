@@ -27,7 +27,7 @@ An app can have **one code agent** (the singleton, name `main`) and **any number
 
 ## Create / update an agent
 
-1. `set-agent({ schema, type: "code" | "scheduled", runtime?, prompt, name?, cron?, tz? })` (passing `runtime` implies scheduled; `"cowork"` is an accepted alias) — create or update (idempotent). On CREATE it returns a ready **copy-paste install prompt** and **where to paste it** (Claude Code for code; the runtime — ChatGPT or Claude Cowork — for scheduled).
+1. `set-agent({ schema, type: "code" | "scheduled", runtime?, prompt, name?, cron?, tz? })` (giving `runtime` implies scheduled; `"cowork"` is an accepted alias) — create or update (idempotent). On CREATE it returns a ready **copy-paste install prompt** and **where to paste it** (Claude Code for code; the runtime — ChatGPT or Claude Cowork — for scheduled).
 2. the `dilaya-agent-setup` skill — step-by-step setup **by type** (the type is the install guard: a code agent can't be installed as a scheduled task or vice-versa), and for a scheduled agent **by runtime** (`runtime` shows another runtime's steps, e.g. to move it).
 3. code only: `get-agent-setup-token({ schema })` — a single-use 15-min token the CLI exchanges for a long-lived poll token (the poll token never enters the conversation).
 

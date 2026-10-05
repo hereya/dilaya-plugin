@@ -12,7 +12,7 @@ Attach a Telegram bot to an app so the app's **agent** can send and receive Tele
 ## One-time setup
 
 1. The user creates a bot with **@BotFather** in Telegram.
-2. `attach-telegram({ schema, owner: "<owner telegram id>" })` — creates the `_telegram_messages` table (in the app's SQLite database) and wires up the static public webhook route. **Bots are private by default**: pass `owner` with the owner's Telegram numeric id — ASK THE USER for it if you don't have it (they can get it from **@userinfobot**). The owner gets the `owner` role. Only make the bot open to everyone on the user's explicit request, by passing `visibility: "public"` (then `owner` is optional but recommended).
+2. `attach-telegram({ schema, owner: "<owner telegram id>" })` — creates the `_telegram_messages` table (in the app's SQLite database) and wires up the static public webhook route. **Bots are private by default**: give `owner` with the owner's Telegram numeric id — ASK THE USER for it if you don't have it (they can get it from **@userinfobot**). The owner gets the `owner` role. Only make the bot open to everyone on the user's explicit request, by giving `visibility: "public"` (then `owner` is optional but recommended).
 3. `get-telegram-setup-url({ schema })` — returns a single-use, 15-min link. The user opens it in a browser and connects the bot there (the page says what to copy from @BotFather; nothing goes through the chat) **and the webhook is registered with Telegram automatically** — no dashboard step.
 
 Check anytime with `get-telegram-status({ schema })` (shows bot username, allowlist, counts). Re-register the webhook if needed with `register-telegram-webhook({ schema })`.
@@ -20,7 +20,7 @@ Check anytime with `get-telegram-status({ schema })` (shows bot username, allowl
 ## Sending (via MCP)
 
 - Text: `send-telegram({ schema, to: "123456789", text: "Hello!" })` — `to` is a numeric chat id (or @channelusername).
-- Rich: pass a `message` object:
+- Rich: give a `message` object:
   - photo: `{ type: "photo", photo: "<public image URL or file_id>", caption: "…" }`
   - document: `{ type: "document", document: "<public file URL or file_id>" }`
   - location: `{ type: "location", latitude: 48.85, longitude: 2.35 }`
@@ -39,7 +39,7 @@ There is **no runtime `telegram` helper and no per-app-backend push path**: inbo
 ## Access control & RBAC: private by default
 
 - **private (default)** — only allow-listed users/chats may interact. Inbound from anyone else is **dropped** (not stored, not delivered); `send-telegram` to a non-allowed target is **rejected**. Seed it at attach time via `owner`. Always default to this.
-- **public** — open to anyone who starts the bot. Only choose this when the user **explicitly asks** for an open bot; pass `visibility: "public"` to `attach-telegram` (or `set-telegram-access`).
+- **public** — open to anyone who starts the bot. Only choose this when the user **explicitly asks** for an open bot; give `visibility: "public"` to `attach-telegram` (or `set-telegram-access`).
 
 **Roles (RBAC):** every allow-listed user has a role — `owner` (full control), `admin` (elevated), or `member` (basic). Non-members on a public bot are `guest`. The role is recorded on every inbound message (the `sender_role` column in `_telegram_messages`) so your agent can authorize actions. Membership gates access; the role is what you check for permissions. `get-telegram-status` lists each allow-listed user with their role.
 

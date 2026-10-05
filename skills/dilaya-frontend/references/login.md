@@ -37,6 +37,6 @@ enable-auth({
 })
 ```
 
-`custom_css` is the escape hatch for what `accent_color` cannot do (fonts, the `.card`, `body` background): it is injected AFTER the shared stylesheet on ALL pages, so cover `button.secondary` (the code page's "resend") as well as `button`. Pass an empty string `""` to reset any param to the default. Changes are live within ~a minute (no redeploy). Subtitles, field labels and error messages stay on the built-in FR/EN i18n.
+`custom_css` is the escape hatch for what `accent_color` cannot do (fonts, the `.card`, `body` background): it is injected AFTER the shared stylesheet on ALL pages, so cover `button.secondary` (the code page's "resend") as well as `button`. Give an empty string `""` to reset any param to the default. Changes are live within ~a minute (no redeploy). Subtitles, field labels and error messages stay on the built-in FR/EN i18n.
 
 > **Key user records by `email`**, never `cognito_sub` — each app has its own Cognito pool, so `cognito_sub` is pool-local and will not survive a pool migration.

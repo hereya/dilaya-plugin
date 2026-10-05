@@ -2,7 +2,7 @@
 
 ```
 list-custom-domains({ schema? })                        # org's custom domains + status + the routing target
-check-custom-domains({ schema? })                       # poll + promote; pass schema to switch that app's mail + OTP senders
+check-custom-domains({ schema? })                       # poll + promote; give schema to switch that app's mail + OTP senders
 remove-custom-domain({ schema, domain, confirm: true }) # stop serving on the domain (vanity + path URL keep working)
 ```
 

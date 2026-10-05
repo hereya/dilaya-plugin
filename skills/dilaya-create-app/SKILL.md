@@ -50,7 +50,7 @@ Inline `rows` caps at 10,000. For LARGE volumes, upload a CSV to org storage and
 get-upload-url({ path: "imports/ingredients.csv" })   // then HTTP PUT the CSV there
 bulk-insert({ schema: "recipes", table: "ingredients", file: "imports/ingredients.csv" })
 ```
-CSV rules: RFC 4180, UTF-8; the first row is a header naming the columns (or pass `columns` + `header: false`); `delimiter` "," (default) or ";"; values are coerced to the table's column types (INTEGER/REAL); empty fields insert NULL (`empty_as_null: false` for empty strings). The import is transactional — all rows or none; errors report the CSV line.
+CSV rules: RFC 4180, UTF-8; the first row is a header naming the columns (or give `columns` + `header: false`); `delimiter` "," (default) or ";"; values are coerced to the table's column types (INTEGER/REAL); empty fields insert NULL (`empty_as_null: false` for empty strings). The import is transactional — all rows or none; errors report the CSV line.
 
 ### 5. Write a skill
 Save instructions that tell future agents how to use this app:

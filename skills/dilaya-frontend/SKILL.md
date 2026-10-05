@@ -7,7 +7,7 @@ Tool names below are the Dilaya connector's tools; your client may show them wit
 
 # Per-app web frontend
 
-Give an app a **standalone web page** real people open in a browser — no Claude, no AI in the loop. It is served by a **per-app Lambda** that runs Node handler code you write and reaches ONLY its own app's SQLite database + files (isolated — see the end). **A site is PRIVATE by default**: the first `enable-frontend` provisions passwordless e-mail login and the platform closes the site, unless you pass `public: true` — a showcase site, a landing page, a menu, anything meant for everyone, needs that explicitly (§5).
+Give an app a **standalone web page** real people open in a browser — no Claude, no AI in the loop. It is served by a **per-app Lambda** that runs Node handler code you write and reaches ONLY its own app's SQLite database + files (isolated — see the end). **A site is PRIVATE by default**: the first `enable-frontend` provisions passwordless e-mail login and the platform closes the site, unless you give `public: true` — a showcase site, a landing page, a menu, anything meant for everyone, needs that explicitly (§5).
 
 > **What a frontend is.** A real website other people visit on their own URL, with no AI in the loop — as opposed to answering in the conversation, which is what you do for the person you are chatting with.
 

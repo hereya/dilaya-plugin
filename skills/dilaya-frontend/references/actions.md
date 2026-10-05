@@ -16,7 +16,7 @@ so an unpinned calculation drifts with nothing on screen to catch it. See « No 
   Do not recompute its answer in SQL, and do not "check" it with a query of your own.
 - SQL (`query`) stays the tool for EXPLORING the data — questions no action answers.
 - **Before a write action, or one that reaches people** (an email, a message, a booking), say in
-  one sentence what it will do and wait for the user's yes. Pass an `idempotencyKey` so a retry
+  one sentence what it will do and wait for the user's yes. Give an `idempotencyKey` so a retry
   after a timeout is recognised instead of run twice.
 
 ### 1. Write the treatment as ONE function the route and the action share
