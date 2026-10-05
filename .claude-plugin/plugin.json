@@ -1,7 +1,7 @@
 {
   "name": "dilaya",
   "version": "1.1.3",
-  "description": "Dilaya: describe how you work and your assistant builds your own software (database, files, web space with email sign-in), hosted and run by Dilaya.",
+  "description": "Dilaya: describe how you work and Claude builds your own software (your data, files, a web space with email sign-in, automations), hosted and run by Dilaya.",
   "author": {
     "name": "Novopattern",
     "email": "contact@dilaya.eu",
@@ -9,11 +9,11 @@
   },
   "homepage": "https://dilaya.eu/en",
   "keywords": [
-    "software",
-    "database",
+    "productivity",
+    "custom-software",
     "no-code",
     "business",
-    "productivity"
+    "automation"
   ],
   "license": "MIT"
 }

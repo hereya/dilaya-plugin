@@ -8,7 +8,20 @@
     {
       "name": "dilaya",
       "source": "./",
-      "description": "The Dilaya connector (mcp.dilaya.eu) and its skills: describe how you work, and Claude builds your own software that Dilaya runs."
+      "description": "Describe how you work, and Claude builds your own software that Dilaya runs: the Dilaya connector (mcp.dilaya.eu) and its skills.",
+      "category": "productivity",
+      "author": {
+        "name": "Novopattern",
+        "email": "contact@dilaya.eu"
+      },
+      "homepage": "https://dilaya.eu/en",
+      "keywords": [
+        "productivity",
+        "custom-software",
+        "no-code",
+        "business",
+        "automation"
+      ]
     }
   ],
   "metadata": {
