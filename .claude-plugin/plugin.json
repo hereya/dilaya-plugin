@@ -8,6 +8,7 @@
     "url": "https://dilaya.eu/en"
   },
   "homepage": "https://dilaya.eu/en",
+  "privacyPolicyUrl": "https://dilaya.eu/en/privacy",
   "keywords": [
     "productivity",
     "custom-software",
@@ -15,5 +16,6 @@
     "business",
     "automation"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "icon": "./.claude-plugin/icon.png"
 }
