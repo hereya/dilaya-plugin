@@ -2,7 +2,7 @@
 
 You drive Dilaya **from your assistant**: you talk to it, and Dilaya gives it the hands to build your software, store your information and put it online. Your software itself runs outside: it has its own address and keeps running once you close the conversation. For that, the two need to be linked **once**. It takes two minutes, and there is nothing to install.
 
-The steps below are **Claude's**, the assistant Dilaya is most used with. Only one thing really matters: the address `https://app.dilaya.eu/mcp`.
+The steps below are **Claude's**, the assistant Dilaya is most used with. Only one thing really matters: the address `https://mcp.dilaya.eu`.
 
 ## 1. Add Dilaya in Claude
 
@@ -10,7 +10,7 @@ On a **computer** (claude.ai or the Claude app):
 
 1. Open the **"Customize"** menu (or "Settings"), then **"Connectors"**.
 2. Click **"Add custom connector"**.
-3. In the address field, paste `https://app.dilaya.eu/mcp` — leave the other fields empty — and confirm with **"Add"**.
+3. In the address field, paste `https://mcp.dilaya.eu` — leave the other fields empty — and confirm with **"Add"**.
 
 On a **phone**, it is done in the same place. If you cannot find the menu, do it once from a computer: Claude keeps the connection for all your devices.
 
@@ -38,7 +38,7 @@ Your assistant recognises Dilaya and gets to work.
 
 **Do I need a particular Claude plan?** No: this connection works on Claude's Free, Pro, Max, Team and Enterprise plans (the Free plan accepts only one).
 
-**An assistant other than Claude?** `https://app.dilaya.eu/mcp` is a standard **MCP** connector: any assistant that can add one connects the same way, through the same authorisation page. Only the menu names differ.
+**An assistant other than Claude?** `https://mcp.dilaya.eu` is a standard **MCP** connector: any assistant that can add one connects the same way, through the same authorisation page. Only the menu names differ.
 
 **Several people in the same workspace?** Each person connects Dilaya in **their own** assistant, with **their own** Dilaya account, once invited into the workspace.
 
