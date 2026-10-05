@@ -7,13 +7,13 @@ Tool names below are the Dilaya connector's tools; your client may show them wit
 
 # Telegram bot
 
-Attach a Telegram bot to an app so the app's **agent** can send and receive Telegram messages. Everything is driven through the **MCP tools** below (send/setup/RBAC/webhook) — there is no runtime `telegram` helper and no per-app-backend push path. Inbound messages are stored in `_telegram_messages` (a table in the app's own SQLite database); the bot's key is typed by the user into a Dilaya web page and kept server-side, never in the chat. No domain setup is needed: the bot's webhook is registered for you, and `attach-telegram` returns its address as `webhook_url`.
+Attach a Telegram bot to an app so the app's **agent** can send and receive Telegram messages. Everything is driven through the **MCP tools** below (send/setup/RBAC/webhook) — there is no runtime `telegram` helper and no per-app-backend push path. Inbound messages are stored in `_telegram_messages` (a table in the app's own SQLite database); the user connects the bot in a Dilaya web page, never through the chat. No domain setup is needed: the bot's webhook is registered for you, and `attach-telegram` returns its address as `webhook_url`.
 
 ## One-time setup
 
-1. Create a bot with **@BotFather** in Telegram → it gives you the **bot's key**.
+1. The user creates a bot with **@BotFather** in Telegram.
 2. `attach-telegram({ schema, owner: "<owner telegram id>" })` — creates the `_telegram_messages` table (in the app's SQLite database) and wires up the static public webhook route. **Bots are private by default**: pass `owner` with the owner's Telegram numeric id — ASK THE USER for it if you don't have it (they can get it from **@userinfobot**). The owner gets the `owner` role. Only make the bot open to everyone on the user's explicit request, by passing `visibility: "public"` (then `owner` is optional but recommended).
-3. `get-telegram-setup-url({ schema })` — returns a single-use, 15-min URL. The user opens it in a browser and pastes the bot's key there, never in the chat; Dilaya keeps it server-side **and the webhook is registered with Telegram automatically** — no dashboard step.
+3. `get-telegram-setup-url({ schema })` — returns a single-use, 15-min link. The user opens it in a browser and connects the bot there (the page says what to copy from @BotFather; nothing goes through the chat) **and the webhook is registered with Telegram automatically** — no dashboard step.
 
 Check anytime with `get-telegram-status({ schema })` (shows bot username, allowlist, counts). Re-register the webhook if needed with `register-telegram-webhook({ schema })`.
 
@@ -27,7 +27,7 @@ Check anytime with `get-telegram-status({ schema })` (shows bot username, allowl
   - buttons / markdown: a text message with extras, e.g. `{ type: "text", text: "Pick one", reply_markup: { inline_keyboard: [[{ text: "Yes", callback_data: "yes" }]] } }`
   - escape hatch: `{ type: "raw", method: "sendDice", params: {} }`
 - A bot can only message users who have **started it** (`/start`) or chats it belongs to — Telegram doesn't allow cold outreach.
-- Download an inbound file with `get-telegram-file({ schema, file_id })` (returns a presigned URL).
+- Download an inbound file with `get-telegram-file({ schema, file_id })` (returns a download link).
 - Show "is typing…" before a slow reply with `send-telegram-chat-action({ schema, to, action: "typing" })`. It clears when your message arrives or after ~5s.
 
 ## Receiving & replying — use an autonomous agent (no polling)
