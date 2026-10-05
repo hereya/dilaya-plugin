@@ -7,7 +7,7 @@ Tool names below are the Dilaya connector's tools; your client may show them wit
 
 # Telegram bot
 
-Attach a Telegram bot to an app so the app's **agent** can send and receive Telegram messages. Everything is driven through the **MCP tools** below (send/setup/RBAC/webhook) — there is no runtime `telegram` helper and no per-app-backend push path. Inbound messages are stored in `_telegram_messages` (a table in the app's own SQLite database); the bot token lives in SSM (never in chat). No per-app domain setup is needed: once the deployment has its custom domain (set once when the connector is deployed, e.g. `app.dilaya.eu`), the bot's webhook is registered for you at the static path route `https://{customDomain}/o/{orgId}/{app}/telegram/webhook` — `attach-telegram` returns it as `webhook_url`.
+Attach a Telegram bot to an app so the app's **agent** can send and receive Telegram messages. Everything is driven through the **MCP tools** below (send/setup/RBAC/webhook) — there is no runtime `telegram` helper and no per-app-backend push path. Inbound messages are stored in `_telegram_messages` (a table in the app's own SQLite database); the bot's key is typed by the user into a Dilaya web page and kept server-side, never in the chat. No domain setup is needed: the bot's webhook is registered for you, and `attach-telegram` returns its address as `webhook_url`.
 
 ## One-time setup
 
