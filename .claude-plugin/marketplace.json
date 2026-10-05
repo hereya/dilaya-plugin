@@ -1,0 +1,17 @@
+{
+  "name": "dilaya",
+  "owner": {
+    "name": "Novopattern",
+    "email": "contact@dilaya.eu"
+  },
+  "plugins": [
+    {
+      "name": "dilaya",
+      "source": "./",
+      "description": "The Dilaya connector (mcp.dilaya.eu) and its skills: describe how you work, and Claude builds your own software that Dilaya runs."
+    }
+  ],
+  "metadata": {
+    "description": "Dilaya for Claude: the Dilaya connector and its skills, in one plugin."
+  }
+}
