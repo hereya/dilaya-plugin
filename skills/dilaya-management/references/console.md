@@ -1,0 +1,8 @@
+## Interactive console: `setup-management-console`
+
+Want a visual, non-technical board instead of raw JSON? `setup-management-console()` (no args, org-scoped) seeds a canned **Claude Cowork dashboard** named `gestion-apps` — a real cockpit: one card per app with its status, a public link for online apps, and safe actions (use an app, create a new app, put online, archive/restore, delete-with-guardrails). It is fed by `list-applications`, so it stays independent of any single app.
+
+- v2 has **no external browser console and no internal SQL view** (a v2 MCP view runs SQL against ONE app's SQLite db and can't read the cross-app registry). The console is *only* the Cowork dashboard.
+- The tool idempotently provisions a reserved, hidden `_console` app (excluded from `list-schemas` / `list-applications`, and undroppable) and seeds the dashboard prompt into it. **Re-run it any time** to ship an updated prompt.
+- It seeds the prompt only. Immediately after, call the `dilaya-dashboard-install` skill and hand that text to the user to paste into Claude Cowork — that one paste makes the Cowork agent generate the dashboard AND attach its source (exactly like any other cowork dashboard). Don't wait to be asked.
+- Action policy the dashboard follows (mirror it if you drive these yourself): destructive actions (`drop-schema`, `disable-frontend`) require re-typing the app name then `confirm: true`; `archive-app({ schema, confirm: true })` is a simple confirm (reversible); `unarchive-app({ schema })` is one click; "put online" and "suggest a dashboard" are copy-paste guided prompts, never direct MCP calls; the console never calls `create-schema` itself (it produces a prompt to copy).

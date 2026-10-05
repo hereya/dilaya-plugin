@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dilaya": {
+      "type": "http",
+      "url": "https://mcp.dilaya.eu"
+    }
+  }
+}
