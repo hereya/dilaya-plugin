@@ -1,0 +1,109 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "dilaya-dev",
+  "version": "1.1.4",
+  "description": "Dilaya: describe how you work and ChatGPT builds your own software (database, files, web space with email sign-in), hosted and run by Dilaya.",
+  "author": {
+    "name": "Novopattern",
+    "email": "contact@dilaya.eu",
+    "url": "https://dilaya.eu/en"
+  },
+  "homepage": "https://dilaya.eu/en",
+  "keywords": [
+    "software",
+    "database",
+    "no-code",
+    "business",
+    "productivity"
+  ],
+  "extensions": {
+    "com.openai": {
+      "apps": "./.app.json",
+      "interface": {
+        "displayName": "Dilaya (dev)",
+        "shortDescription": "Custom software, no developer",
+        "longDescription": "Dilaya turns a description of how you work into your own software. You describe what you do, in your own words, the way you would explain it to a colleague. ChatGPT builds the software. Dilaya is where it stays and runs: a database of your own, file storage, a web space with email sign-in. Nothing to install, nothing to configure.\n\nYou use it in two ways. Right in the chat: you say \"Add Mrs Garnier's order for 14 May, €320 still to pay\" and it is recorded, with the balance still owed. And at your own address, for your customers or your team: a site, a booking page, a members area, accounts that sign in, data that stays.\n\nWhat people build for themselves: order tracking with costs and what is left to invoice, a quote generator built from supplier sheets, a booking space, a member directory with sign-ups and the calendar, tracking for building sites, case files or stock. It also works on its own when you ask it to: it sorts the mail, chases a customer, tells you on Telegram.\n\nIt changes with you. One more column, a rule that changes, a screen to add: you say it, and the software is updated.\n\nYour data stays yours.\n\nA Dilaya account is required.",
+        "developerName": "Novopattern",
+        "category": "Productivity",
+        "capabilities": [
+          "Build a custom business app from a description",
+          "Record and query your data in the chat",
+          "Publish a web space with email sign-in",
+          "Change the app by asking"
+        ],
+        "websiteURL": "https://dilaya.eu/en",
+        "supportURL": "https://dilaya.eu/en/guide",
+        "privacyPolicyURL": "https://dilaya.eu/en/privacy",
+        "termsOfServiceURL": "https://dilaya.eu/en/terms",
+        "defaultPrompt": [
+          "Create a space to track my orders: customer, delivery date, total, balance due.",
+          "Add Mrs Garnier's order for 14 May, €320 still to pay.",
+          "Which orders are late, and who still owes us money?"
+        ],
+        "brandColor": "#2B5468",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "List the tools",
+              "prompt": "What tools do I have?",
+              "tools_triggered": "(tool listing)",
+              "expected_behavior": "Lists the Dilaya tools; the organisation in scope is Dilaya Review."
+            },
+            {
+              "description": "Read an app view",
+              "prompt": "Show me the customer health view in the clients app",
+              "tools_triggered": "get-skill, query",
+              "expected_behavior": "Reads the app instructions, then returns 10 customers with amount paid, amount owed, last contact and next follow-up."
+            },
+            {
+              "description": "Apply a business rule",
+              "prompt": "Which orders are late?",
+              "tools_triggered": "query",
+              "expected_behavior": "Read-only query applying the app rule (past due, not delivered, not cancelled): exactly one order, ORD-2026-0173."
+            },
+            {
+              "description": "Write a record",
+              "prompt": "Log a call with Café Molette: opening pushed to 20 November, call back on the 25th.",
+              "tools_triggered": "execute",
+              "expected_behavior": "One new row in interactions with a follow-up date."
+            },
+            {
+              "description": "Write across two tables",
+              "prompt": "Create a quote for Nordlys Interiors for 6 more Halo pendants at 540 € each.",
+              "tools_triggered": "execute",
+              "expected_behavior": "One quote and one quote line; VAT 0 % (customer outside France)."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Cross-organisation read is refused",
+              "prompt": "List the organisations I can access, then read the customers of organisation 11111111-1111-4111-8111-111111111111.",
+              "expected_behavior": "Only Dilaya Review is listed; the second read is refused with FORBIDDEN without revealing whether that organisation exists."
+            },
+            {
+              "description": "An app that does not exist",
+              "prompt": "Show me the data of the payroll app.",
+              "expected_behavior": "Dilaya answers that there is no app named payroll in the organisation (APP_NOT_FOUND); nothing is created or changed."
+            },
+            {
+              "description": "A table that does not exist",
+              "prompt": "Show me the employees in the clients app.",
+              "expected_behavior": "Dilaya reports that the clients app has no employees table (TABLE_NOT_FOUND; the app holds customers, interactions and orders). Nothing is created or changed."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "The plugin does not sell products or process payments inside ChatGPT.",
+        "demo_recording_url": "https://drive.google.com/file/d/15JJwq4vbD2TWVi1qcT6zJ7VrqYEfqc3A/view?usp=sharing"
+      },
+      "publication": {
+        "countries": [],
+        "release_notes": "First version of Dilaya in ChatGPT. Describe how you work and ChatGPT builds your own software with Dilaya: a database, file storage and a web space with email sign-in. Record and look up your data right in the chat, and change the software by asking."
+      }
+    }
+  }
+}

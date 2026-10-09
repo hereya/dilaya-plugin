@@ -1,0 +1,47 @@
+{
+  "name": "dilaya-dev",
+  "version": "1.1.4",
+  "description": "Dilaya: describe how you work and ChatGPT builds your own software (database, files, web space with email sign-in), hosted and run by Dilaya.",
+  "author": {
+    "name": "Novopattern",
+    "email": "contact@dilaya.eu",
+    "url": "https://dilaya.eu/en"
+  },
+  "homepage": "https://dilaya.eu/en",
+  "license": "MIT",
+  "keywords": [
+    "software",
+    "database",
+    "no-code",
+    "business",
+    "productivity"
+  ],
+  "apps": "./.app.json",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Dilaya (dev)",
+    "shortDescription": "Custom software, no developer",
+    "longDescription": "Dilaya turns a description of how you work into your own software. You describe what you do, in your own words, the way you would explain it to a colleague. ChatGPT builds the software. Dilaya is where it stays and runs: a database of your own, file storage, a web space with email sign-in. Nothing to install, nothing to configure.\n\nYou use it in two ways. Right in the chat: you say \"Add Mrs Garnier's order for 14 May, €320 still to pay\" and it is recorded, with the balance still owed. And at your own address, for your customers or your team: a site, a booking page, a members area, accounts that sign in, data that stays.\n\nWhat people build for themselves: order tracking with costs and what is left to invoice, a quote generator built from supplier sheets, a booking space, a member directory with sign-ups and the calendar, tracking for building sites, case files or stock. It also works on its own when you ask it to: it sorts the mail, chases a customer, tells you on Telegram.\n\nIt changes with you. One more column, a rule that changes, a screen to add: you say it, and the software is updated.\n\nYour data stays yours.\n\nA Dilaya account is required.",
+    "developerName": "Novopattern",
+    "category": "Productivity",
+    "capabilities": [
+      "Build a custom business app from a description",
+      "Record and query your data in the chat",
+      "Publish a web space with email sign-in",
+      "Change the app by asking"
+    ],
+    "websiteURL": "https://dilaya.eu/en",
+    "supportURL": "https://dilaya.eu/en/guide",
+    "privacyPolicyURL": "https://dilaya.eu/en/privacy",
+    "termsOfServiceURL": "https://dilaya.eu/en/terms",
+    "defaultPrompt": [
+      "Create a space to track my orders: customer, delivery date, total, balance due.",
+      "Add Mrs Garnier's order for 14 May, €320 still to pay.",
+      "Which orders are late, and who still owes us money?"
+    ],
+    "brandColor": "#2B5468",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "screenshots": []
+  }
+}
