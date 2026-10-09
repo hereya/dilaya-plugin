@@ -1,0 +1,7 @@
+## Choosing the architecture — YOU decide, don't ask the user
+
+**Pick the optimal architecture yourself from what the site IS; never ask the user to arbitrate technical choices.** Most Dilaya users are non-technical: ask business questions only (what kind of site, what content, who visits), never "static or dynamic?", and never expose jargon like "static", "cache", "Lambda", "vanity host" — translate to concrete benefits ("faster", "ranks better on Google").
+
+**Default rule:** a showcase site / landing / docs / any site whose content is the same for every visitor ⇒ **static-first** (`static_prefixes: ["/"]` + pre-built pages in `site/`, `handler.js` only for `/api/*` — e.g. a contact form). It's faster and better for SEO than rendering per request. Reserve dynamic pages for genuinely personalized or authenticated content, and go **hybrid** (narrower prefixes) when a site mixes both.
+
+**Host note:** static sections serve on the app's **vanity host or custom domain** (not the path URL). The vanity host is free and immediate (`set-app-host`, §6) — so a static-first site never needs to wait: provision the vanity host up front and serve on it right away; a customer's own domain is optional and can be attached later (`set-custom-domain`) with no change to the site. While their domain's certificate validates, say "your site will be visible at your address as soon as it's ready" — don't explain DNS/TLS.
