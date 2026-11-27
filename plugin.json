@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "dilaya",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Dilaya: describe how you work and ChatGPT builds your own software (database, files, web space with email sign-in), hosted and run by Dilaya.",
   "author": {
     "name": "Novopattern",
