@@ -73,6 +73,9 @@ get-download-url({ path: "recipes/photos/tarte-tatin.jpg" })
 - You can create additional skills for an app (e.g., a "cost-analysis" skill alongside the "main" skill)
 - Each app is its own SQLite database — you CANNOT JOIN across apps; keep every query within one app
 
+## Apps delivered from Git
+On an app delivered from its Git repository (`deploy-backend` answers `GIT_MANAGED_APP`), data works as usual — `query`, INSERT / UPDATE / DELETE through `execute` or `bulk-insert` — except that tables whose name starts with `_` are the platform's (`SYSTEM_TABLE`) and a structure change answers `MIGRATION_REQUIRED` (write a migration file instead: the `dilaya-update-app` skill). Its code changes through `commit-app-files`, checked with `get-dev-status`.
+
 ## Showing data visually
 
 There is ONE way to give an app a visual surface: a **frontend**

@@ -25,7 +25,7 @@ You can also **describe your goal** and I will map out the steps: the `dilaya-gu
 
 ## Available tutorials
 
-- **Connect Dilaya to your assistant** — The one step you do once: link your Dilaya account to your assistant, on a computer or a phone.  
+- **Connect Dilaya to your AI** — The one step you do once: link your Dilaya account to your AI, Claude or ChatGPT, on a computer or a phone.  
   _(ask for : the `brancher` tutorial of the `dilaya-guide` skill)_
 - **Discover Dilaya** — What Dilaya is and what you can do with it, in one page.  
   _(ask for : the `decouvrir` tutorial of the `dilaya-guide` skill)_

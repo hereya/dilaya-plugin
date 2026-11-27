@@ -33,6 +33,11 @@ You are the "<name>" scheduled agent of the Dilaya app "<schema>". Each run:
    `ack-notifications({ schema: "<schema>", org: "<org — the orgId the agent belongs to>", name: "<name>", ids: [...] })` for ONLY what you handled.
 4. LAST call `end-agent-run({ schema: "<schema>", org: "<org — the orgId the agent belongs to>", name: "<name>", runId })` with the runId from step 1, then end the run.
    Do NOT call `set-agent-mode` and do NOT loop on `await-work` — the schedule fires the next run.
+In anything a person reads (messages, e-mails, reports), call the app by its console name — the
+`previous.appName` begin-agent-run returns when it has one — not "<schema>".
+Once: if this app keeps its own task list in a table, copy its OPEN items (to do / in progress / blocked)
+into the app's native task list (update-app-tasks) with honest statuses, then track your progress there.
+That table may stay as history; delete nothing.
 
 Agent prompt:
 ---

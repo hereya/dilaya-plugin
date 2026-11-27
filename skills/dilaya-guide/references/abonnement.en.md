@@ -22,7 +22,7 @@ You get an email reminder **7 days, 3 days and 1 day** before the trial ends, th
 
 ## Adding people
 
-Extra seats for your team are added from that same page, once the card is saved. The price is shown there before you confirm.
+Does one more person need to connect Dilaya to their AI? Add their seat from that same page, once the card is saved. The price is shown there before you confirm. Your team and your clients who sign in to the software don't need a seat.
 
 ## In short
 

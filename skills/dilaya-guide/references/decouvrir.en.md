@@ -1,6 +1,6 @@
 # Discover Dilaya
 
-Dilaya lets you have **your own software, built around you** — without a developer — just by talking to your assistant. You describe what you do, it builds the software and Dilaya keeps it running.
+Dilaya lets you have **your own software, built around you** — without a developer — just by talking to your AI. You describe what you do, it builds the software and Dilaya keeps it running.
 
 ## What you can build
 
@@ -13,11 +13,11 @@ Dilaya lets you have **your own software, built around you** — without a devel
 
 ## How it works, in practice
 
-There is **nothing to install**: you connect Dilaya to your assistant once (see "Connect Dilaya to your assistant"), then you say what you want, in plain words. It does the rest: create the software, store your data, show it to you, and — if you want — put it online.
+There is **nothing to install**: you connect Dilaya to your AI once (see "Connect Dilaya to your AI"), then you say what you want, in plain words. It does the rest: create the software, store your data, show it to you, and — if you want — put it online.
 
 ## What is left when the conversation closes
 
-That is the difference from "doing the same thing with AI". A conversation produces a table, a document, a PDF — and you start again next month. Here, what you describe **becomes software**: it has an address, it keeps your data, it is still there tomorrow.
+That is the difference from "doing the same thing with AI". A conversation produces a table, a document, a PDF — and you start again next month. Here, what you describe **becomes software**: it has an address, it keeps your data, it is still there tomorrow. And you can switch AI: everything stays at Dilaya.
 
 ## Where to start
 

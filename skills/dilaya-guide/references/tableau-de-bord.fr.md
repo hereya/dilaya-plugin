@@ -14,6 +14,8 @@ Au-delà d'un simple affichage dans la conversation, tu peux te faire un **vrai 
 
 Le tableau de bord est conçu, généré, et sa **recette est sauvegardée** pour que tu puisses le retrouver et le regénérer plus tard, même sur une autre machine.
 
+Le tableau de bord vivant est un artefact **Claude Cowork** : c'est là qu'il se crée et se consulte. Depuis ChatGPT, tu gardes les affichages dans la conversation et la console de gestion ; le tableau de bord vivant reste côté Claude.
+
 ## Astuce
 
 Si tu veux un tableau de bord pour **gérer toutes tes apps au même endroit** (les voir, les mettre en ligne, les ranger), demande la **console de gestion** — voir le tutoriel « Gérer toutes tes apps ».

@@ -89,10 +89,10 @@ names one the handler does not route). The description is what tells Claude WHEN
 
 1. Pick 3 to 5 real cases (e.g. 10, 30, 80 guests).
 2. For each, run the current SQL recipe AND the action (`env: "staging"` first, after a
-   `deploy-backend` with `env: "staging"`). Show the user the two answers side by side.
+   `deploy-backend` with `env: "staging", confirm: true`). Show the user the two answers side by side.
 3. Any difference is a decision for the user — which one is right — never a silent pick. Fix the
    function until they agree (or until the user confirms the new one is the right one).
-4. `promote-deployment`, then run one case on production.
+4. `promote-deployment({ schema, confirm: true })`, then run one case on production.
 
 ### 4. Switch the skill
 

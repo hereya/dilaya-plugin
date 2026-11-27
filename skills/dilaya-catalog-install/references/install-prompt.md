@@ -30,8 +30,9 @@ Ce message est adressé à l'agent qui exécute l'installation via le connecteur
    **Connexions MCP — deux cibles TRÈS différentes, ne les confonds pas.** Chaque prérequis
    « Connexion MCP » indique sa cible :
    - **« à connecter dans ton assistant »** : l'utilisateur ajoute le serveur MCP dans SON
-     assistant LUI-MÊME (dans Claude : claude.ai > Paramètres > Connecteurs, ou `claude mcp add`
-     côté Claude Code) pour que la conversation et les agents cowork/code accèdent à ses outils.
+     IA LUI-MÊME (le menu des connecteurs ou des plugins de son IA — Claude : Paramètres >
+     Connecteurs ; ChatGPT : Plugins > Add custom MCP server ; `claude mcp add` côté Claude
+     Code) pour que la conversation et les agents cowork/code accèdent à ses outils.
      `add-mcp-connection` n'a RIEN à faire ici — guide l'utilisateur pas à pas avec l'URL
      déclarée.
    - **« pour le backend de l'app »** : la lambda de l'app appelle ce serveur au runtime via la

@@ -57,9 +57,28 @@ Each tick: `begin-agent-run({ schema, org, name })` FIRST → the work in the pr
 
 **Connector readiness comes before `begin-agent-run`:** on a fresh session this app's tools are deferred MCP tools loaded via ToolSearch, and the tool index can lag the connection by a few seconds. An empty first ToolSearch is a transient indexing race, **not** a disconnected connector — retry ToolSearch ~5x over ~20s; never declare the connector down or end the turn without retrying. Then: `begin-agent-run` FIRST (returns why it woke: first_run | resumed_from_idle | recovered_from_crash) → do all available work → optionally `await-work` for a cheap back-and-forth (~20 s server-side block, no tokens) → before idle `ack-notifications` what it handled and `set-agent-mode({ mode: "continue" | "new" })` to pick the next wake → end the turn. Never sleep/busy-wait; the poller wakes it on work.
 
+## Messages from the Dilaya console (any agent)
+
+Where the organization has the Dilaya console (dilaya.eu/console), a person can write to an app's agent there. The message arrives in the agent's inbox like a Telegram one, with `data.source: "console"` (`data.kind` `text` → `data.text`; `button` → `data.askId` + `data.callbackData`, plus `data.passkey_verified: true` when the question demanded a passkey and it was given). **Answer in the console, not on Telegram**: `notify({ schema, org, name: "console", message, data: { kind: "reply" } })` — `data.reply` on the entry holds that call with the app and org filled in. Plain text, ≤ 4000 characters. A question with buttons: `data: { kind: "ask", askId: <new each time>, buttons: [{ label, value }] (≤ 6), requires_passkey }` — set `requires_passkey: true` when the answer commits (merge, deploy, money, customer data, security), and act on such an answer only if `data.passkey_verified === true`. An open question no longer relevant: `data: { kind: "close", askId, reason? }` (≤ 200 characters) greys its buttons. A status card: `data: { kind: "card", cardKey, title, state, url? }` (the latest card of a key is the one shown). Typing dots: when you really take the message, FIRST write `data: { kind: "typing" }` — the person sees three dots until your next console entry (at most 2 minutes; `on: false` cancels) — and never otherwise. Ack the entry with `ack-notifications` like any other. A managed agent has no `notify`: it answers with `send-telegram`.
+
+**The app's task list** (the console's « Tâches » tab, every agent): for work in several steps, `update-app-tasks({ schema, add: [one title per step], source: <the console message id> })` first, then one step at a time — `set` it to `doing` when you start, `done` only once it is really done, `blocked` when it waits on the person. Before ending the turn, give every open task its true status; never leave finished work as `todo` or `doing`. `list-app-tasks` at the start of a wake shows where you left off.
+
+**Reporting to a person in the console instead of Telegram.** When the person asks to receive an agent's recaps, alerts or reports in the Dilaya console, the agent (scheduled included) writes them into its app's console thread — `notify({ schema, org, name: "console", message, data: { kind: "reply" } })` — instead of `send-telegram`. They get a push notification and read it in that app's conversation, listed even when the app has no code agent. Keep `send-telegram` where nobody asked for the console.
+
 ## Scheduled proactive work (code agent)
 
 `set-agent-schedule({ schema, cron, tz, prompt })` / `list-agent-schedules` / `remove-agent-schedule` — a cron tick injects a notification carrying the prompt, draining through the same notifications path as reactive work. No extra infra.
+
+## Managed agents (beta — only where `set-managed-agent` is listed)
+
+A third kind, opened per organization: the agent runs in the app owner's OWN Claude account (Claude Managed Agents), paid by their Claude API key — with a Max or Team plan, the monthly API credits they claim in Claude's billing settings. Nothing to install or paste.
+
+1. `set-managed-agent({ schema, name, prompt, model? })`. Without a key yet it creates nothing and returns `keyUrl`: give the user that link (single use, 15 min) — they paste a key from platform.claude.com → Settings → API keys there, never in the chat — then call it again with the same arguments.
+2. It wakes on its inbox: every `notify({ schema, name, message })` addressed to it starts ONE session (a burst is one session; never two at once), capped at 1 USD per wake. Its run contract is the scheduled one above (`begin-agent-run` → work → `end-agent-run`), and its token reaches only this app and its own inbox.
+3. **When the owner's account refuses it** — key wrong or revoked, or no credit left — the agent is PAUSED (`enabled: false`; retrying could not succeed) and a monitoring fiche says which: repair in the Claude Console (new key via `get-secret-setup-url({ schema, name: "_ANTHROPIC_API_KEY" })`, or credit in Settings → Billing), then call `set-managed-agent` again with the prompt from `get-agent`: it verifies the key and turns the agent back on. Never edit the app's code for it.
+4. **Telegram**: `set-managed-agent({ …, telegram: true })` hands it the app's bot — each message to the bot lands in ITS inbox and wakes it, instead of the code agent's (`telegram: false` hands the bot back; an agent deleted or switched off sends messages back to the code agent). It answers with `send-telegram` (files too), only to chats on the bot's allowlist.
+5. It has a shell and file tools in a private sandbox that lasts one run and has NO internet access: Dilaya is its only way out. No web search or fetch.
+6. `delete-agent({ schema, name })` also archives it in the owner's account.
 
 ## Lifecycle bookends
 

@@ -31,3 +31,5 @@ This is the table of contents, not the recipe: read the sections a step needs be
 - [Manage](references/byod-manage.md) — `byod-manage`
 - [Migrating a domain that is ALREADY live elsewhere](references/byod-migrate.md) — `byod-migrate`
 - [Buying a NEW domain through Dilaya (billed org option)](references/buy-domain.md) — `buy-domain`
+- [Managing a bought domain: renewal and transfer out](references/manage-domain.md) — `manage-domain`
+- [Your own DNS records on a bought domain (outside mailbox, verification)](references/domain-dns.md) — `domain-dns`

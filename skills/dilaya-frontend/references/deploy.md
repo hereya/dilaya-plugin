@@ -1,7 +1,8 @@
 ## 4. Deploy + test
 
 ```
-deploy-backend({ schema: "myapp" })
+deploy-backend({ schema: "myapp", confirm: true })
+# confirm: true is required — the deploy replaces the code the site serves now;
 # first call creates the per-app Lambda + public routes and turns the site on;
 # later calls just push new code.
 test-backend({ schema: "myapp", path: "/", method: "GET" })

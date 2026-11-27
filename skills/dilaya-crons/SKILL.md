@@ -51,6 +51,21 @@ exports.handler = async (event) => {
 - Retries are short and bounded (2 attempts, ≤5 min): a persistently failing cron is a BUG — log
   loudly (`reconcile_log`-style table + last_error columns), don't re-drive it.
 
+## Limits
+
+- **Every 15 minutes at most.** A recurring `cron` whose two closest firings are under 15 min apart
+  (`*/5 * * * ? *`, `0,10 * * * ? *`, `55,5 * * * ? *` — 55 → next hour's 05) is refused with
+  `CRON_TOO_FREQUENT`, on create and on update. `0/15 * * * ? *` (every 15 min) or `0 * * * ? *`
+  (hourly) pass. One-shots (`at`) are exempt. An expression the check cannot read (a range that
+  wraps like `50-10`, an unknown `rate()` unit) is refused too, with `CRON_UNVERIFIABLE`: keep the
+  minute and hour fields to plain values, lists, ascending ranges and steps.
+- **Recurring: 10 per app, 50 per organization** (all its apps together) —
+  `CRON_LIMIT_REACHED` / `CRON_ORG_LIMIT_REACHED`. One-shots never count toward these.
+- **One-shots: 100 pending per app** (until each fires and self-deletes) —
+  `CRON_ONESHOT_LIMIT_REACHED`. One `cron.at` per booking is fine within that; for more pending
+  items, use one recurring cron that scans a table of due items.
+- Only a NEW name counts: updating an existing schedule is always allowed.
+
 ## Teardown
 
 `remove-app-cron` by name; `disable-frontend` and `drop-schema` remove ALL the app's schedules.

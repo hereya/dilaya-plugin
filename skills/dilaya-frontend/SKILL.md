@@ -11,6 +11,8 @@ Give an app a **standalone web page** real people open in a browser — no Claud
 
 > **What a frontend is.** A real website other people visit on their own URL, with no AI in the loop — as opposed to answering in the conversation, which is what you do for the person you are chatting with.
 
+> **Screens for the TEAM, inside the Dilaya console? Not a website.** « Interface », « écran », « tableau de bord pour l'équipe », « dans la console » → the internal interface: the `dilaya-app-interface` skill (`deploy-app-interface`, no `enable-frontend`).
+
 ## Sections
 
 This is the table of contents, not the recipe: read the sections a step needs before acting on it.
@@ -30,3 +32,4 @@ This is the table of contents, not the recipe: read the sections a step needs be
 - [Optional staging environment](references/staging.md) — `staging`
 - [Actions — freeze an exact treatment in the backend, and CALL it](references/actions.md) — `actions`
 - [Isolation](references/isolation.md) — `isolation`
+- [Internal interface (Dilaya console) — not a website](references/app-interface.md) — `app-interface`

@@ -7,6 +7,8 @@ You can hand recurring work to an **automatic helper** that runs **without you**
 - ⏰ **At a fixed time** — "every morning at 8, prepare a summary of yesterday's orders and send it to me".
 - 🔔 **When something new happens** — a helper that reacts as soon as a message or a change arrives (answering on Telegram automatically, for instance).
 
+Both work with Claude as with ChatGPT. One special case: the **code agent**, a helper that changes your software on its own from a computer, runs under **Claude Code**.
+
 ## Examples
 
 > "In Dilaya, every Monday, send me the week's **top 5 customers** on Telegram."

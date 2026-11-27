@@ -2,8 +2,8 @@
 
 Every app carries a `visibility`, and the two values name the AUDIENCE rather than saying "public" or "private" — because "public" never says public TO WHOM:
 
-- **`organisation`** (the default at creation) — every member of the organization may use it.
-- **`personal`** — the member who created it, alone.
+- **`personal`** (the default at creation) — the member who created it, alone.
+- **`organisation`** — every member of the organization may use it. Opening an app to the organization is always an explicit act: `set-app-visibility({ schema, visibility: "organisation" })`, only when the user asks for it (e.g. "my colleagues need it"). Apps created before 2026-11-20 keep the visibility they had.
 
 - `set-app-visibility({ schema, visibility: "organisation" | "personal" })` — the app's **owner** only.
 - `reassign-app({ schema, to_user_id? })` — the **organization's owner** only; `to_user_id` omitted takes it for themselves. This is how an app is recovered when the member who created it leaves, instead of being stranded. Visibility is left untouched.

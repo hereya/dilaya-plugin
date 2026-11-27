@@ -1,4 +1,4 @@
-# Premiers pas — script de conduite (pour toi, Claude)
+# Premiers pas — script de conduite (pour toi, l'IA)
 
 **Ceci n'est pas un texte à réciter.** C'est la conduite à tenir quand quelqu'un arrive sur Dilaya pour la première fois. Tu mènes une conversation, et tu en sors avec **un logiciel qui tourne, à elle**.
 

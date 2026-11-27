@@ -7,7 +7,7 @@ Tool names below are the Dilaya connector's tools; your client may show them wit
 
 # MCP connections — let an app's backend call external MCP tools (no agent, no LLM)
 
-Connect the ORGANIZATION to an external MCP server once (OAuth, user-consented), grant an app an
+Connect an external MCP server once (OAuth, user-consented, with the USER's own account), grant an app an
 EXPLICIT tool allowlist, and its deployed backend handler calls those tools deterministically —
 instant, zero LLM tokens. Example: a booking app confirms an appointment AND sends the
 confirmation email through a calendar/email MCP, straight from its HTTP handler.
@@ -16,9 +16,9 @@ confirmation email through a calendar/email MCP, straight from its HTTP handler.
 
 The moment a design needs an external service (send email, touch a calendar, create a Zoom, post
 to a CRM…), don't say "I can't" and don't wait to be asked:
-1. **Inventory first** — `list-mcp-connections`: connections are ORG-LEVEL and shared, so another
-   app may already have opened the one you need. REUSE it (just `grant-mcp-tools` your app);
-   never create a duplicate connection to the same server.
+1. **Inventory first** — `list-mcp-connections`: the user may already own the connection you need
+   (`mine: true`). REUSE it (just `grant-mcp-tools` your app); never create a duplicate connection
+   to the same server. Another member's connection (`mine: false`) is THEIR account: never use it.
 2. **If none fits, propose it in the user's language** — e.g. « Pour que l'app envoie les emails
    depuis votre boîte, je vous donne un lien à ouvrir : vous vous connectez, vous approuvez,
    30 secondes — rien à coller dans la conversation. » Then run `add-mcp-connection` and hand
@@ -26,8 +26,23 @@ to a CRM…), don't say "I can't" and don't wait to be asked:
    link without being asked.
 
 > **Frontend feature.** Tools are called by a deployed backend handler (`mcp.call`), so this pairs
-> with the `frontend` topic. Connections are org-level and shared across apps; grants are per app
-> and fail-closed (a tool not on the app's allowlist is refused by the platform).
+> with the `frontend` topic. Grants are per app and fail-closed (a tool not on the app's allowlist
+> is refused by the platform).
+
+## Whose account — a connection is PERSONAL
+
+A connection signs in with the account of the person who connected it (Pilote: their mail, their
+calendar). So it BELONGS to them (`scope: "personal"`) and serves only THEIR PERSONAL apps
+(`set-app-visibility` `personal`). Only its owner re-connects it, grants its tools or lists them
+(`MCP_CONNECTION_NOT_OWNER` for anyone else); the owner or the organization's owner may remove it.
+Granting it to an ORGANIZATION app answers `MCP_ORG_SCOPE_CONFIRMATION_REQUIRED`: every member who
+reaches that app would act with the owner's account, which only the owner can accept, outside the
+chat: the answer carries a link to dilaya.eu (30 min, the owner alone, a passkey) and grants nothing.
+Give the user that link and say plainly what it accepts; once confirmed, the tools are granted and the
+connection may serve the organization's apps. Or offer the other ways: make the app personal, or connect
+a separate account meant for the organization. You cannot confirm it; never work around it. An app's backend that calls a connection it may
+no longer use gets `MCP_CONNECTION_PERSONAL` (e.g. the app was shared again). Connections from
+before this rule show `scope: "legacy"` and work as they always did.
 
 ## Flow
 
@@ -158,12 +173,12 @@ exports.handler = async (event) => {
   McpError** with a machine-readable `.code`: `MCP_NOT_GRANTED` (tool not on the allowlist),
   `MCP_NOT_CONNECTED` / `MCP_AUTH_EXPIRED` (user must redo the consent — re-run
   add-mcp-connection), `MCP_TOOL_ERROR` (the tool itself errored — message has the detail),
-  `MCP_UPSTREAM_ERROR`.
+  `MCP_UPSTREAM_ERROR`, `MCP_CONNECTION_PERSONAL` / `MCP_ORG_SCOPE_PENDING` (see « Whose account »).
 - `mcp.listTools(connection)` → the tools THIS app is granted, with their input schemas.
 - Token refresh is automatic and server-side; the app's Lambda never sees any credential.
 
 ## Teardown
 
-`revoke-mcp-tools` per app; `remove-mcp-connection({ name, confirm: true })` deletes the org
+`revoke-mcp-tools` per app; `remove-mcp-connection({ name, confirm: true })` deletes the
 connection, its stored credentials, and every app's grants on it. Dropping an app deletes its
 grants automatically.

@@ -18,7 +18,7 @@ Relay the welcome: [fr](references/welcome.fr.md) · [en](references/welcome.en.
 
 | key | tutorial | (FR) | read |
 | --- | --- | --- | --- |
-| `brancher` | Connect Dilaya to your assistant — The one step you do once: link your Dilaya account to your assistant, on a computer or a phone. | Brancher Dilaya à ton assistant | [fr](references/brancher.fr.md) · [en](references/brancher.en.md) |
+| `brancher` | Connect Dilaya to your AI — The one step you do once: link your Dilaya account to your AI, Claude or ChatGPT, on a computer or a phone. | Brancher Dilaya à ton IA | [fr](references/brancher.fr.md) · [en](references/brancher.en.md) |
 | `decouvrir` | Discover Dilaya — What Dilaya is and what you can do with it, in one page. | Découvrir Dilaya | [fr](references/decouvrir.fr.md) · [en](references/decouvrir.en.md) |
 | `premiere-app` | Create your first app — From scratch: describe what you need and get working software. | Créer ta première app | [fr](references/premiere-app.fr.md) · [en](references/premiere-app.en.md) |
 | `donnees` | Add and find your data — Fill your software, search, filter, update, import in bulk. | Ajouter et retrouver tes données | [fr](references/donnees.fr.md) · [en](references/donnees.en.md) |

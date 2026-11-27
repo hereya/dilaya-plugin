@@ -1,6 +1,6 @@
 # Découvrir Dilaya
 
-Dilaya te laisse **avoir ton propre logiciel, sur mesure** — sans développeur — juste en discutant avec ton assistant. Tu décris ton métier, il construit le logiciel et Dilaya le fait tourner.
+Dilaya te laisse **avoir ton propre logiciel, sur mesure** — sans développeur — juste en discutant avec ton IA. Tu décris ton métier, elle construit le logiciel et Dilaya le fait tourner.
 
 ## Ce que tu peux te construire
 
@@ -13,11 +13,11 @@ Dilaya te laisse **avoir ton propre logiciel, sur mesure** — sans développeur
 
 ## Comment ça marche, en pratique
 
-Tu n'as **rien à installer** : tu branches Dilaya à ton assistant une seule fois (tutoriel « Brancher Dilaya à ton assistant »), puis tu dis ce que tu veux, en langage courant. Il s'occupe du reste : créer le logiciel, y ranger tes données, te les montrer, et — si tu le souhaites — le mettre en ligne.
+Tu n'as **rien à installer** : tu branches Dilaya à ton IA une seule fois (tutoriel « Brancher Dilaya à ton IA »), puis tu dis ce que tu veux, en langage courant. Elle s'occupe du reste : créer le logiciel, y ranger tes données, te les montrer, et — si tu le souhaites — le mettre en ligne.
 
 ## Ce qui reste quand la conversation se ferme
 
-C'est la différence avec « faire la même chose avec l'IA ». Une conversation produit un tableau, un document, un PDF — et tu recommences le mois suivant. Ici, ce que tu décris **devient un logiciel** : il a une adresse, il garde tes données, il est encore là demain.
+C'est la différence avec « faire la même chose avec l'IA ». Une conversation produit un tableau, un document, un PDF — et tu recommences le mois suivant. Ici, ce que tu décris **devient un logiciel** : il a une adresse, il garde tes données, il est encore là demain. Et tu peux changer d'IA : tout reste chez Dilaya.
 
 ## Par où commencer
 

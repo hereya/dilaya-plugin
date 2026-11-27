@@ -3,9 +3,9 @@
 For impactful changes, deploy to **staging** first, test, then promote:
 
 ```
-deploy-backend({ schema: "myapp", env: "staging" })   # 1st call provisions staging lazily
+deploy-backend({ schema: "myapp", env: "staging", confirm: true })   # 1st call provisions staging lazily
 # → test on https://myapp-<orgslug>--stg.<contentDomain>/ (or test-backend({env:'staging'}))
-promote-deployment({ schema: "myapp" })               # the EXACT staged zip goes live (new version)
+promote-deployment({ schema: "myapp", confirm: true })               # the EXACT staged zip goes live (new version)
 ```
 
 - Staging = **same app, same DATA** (SQLite, files, secrets, auth) — only the CODE is the candidate. It is a preview of new code on real data, not a data sandbox.
