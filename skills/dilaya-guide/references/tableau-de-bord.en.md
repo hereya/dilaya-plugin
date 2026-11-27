@@ -14,6 +14,8 @@ Beyond a simple display inside the conversation, you can have a **real dashboard
 
 The dashboard is designed, generated, and its **recipe is saved** so you can find it again and regenerate it later, even on another machine.
 
+A live dashboard is a **Claude Cowork** artifact: that is where it is built and viewed. From ChatGPT you keep the in-conversation views and the management console; the live dashboard stays on the Claude side.
+
 ## Tip
 
 If you want a dashboard to **manage all your apps in one place** (see them, put them online, tidy them away), ask for the **management console** — see "Manage all your apps".

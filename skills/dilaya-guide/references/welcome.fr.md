@@ -25,7 +25,7 @@ Tu peux aussi **décrire ton objectif** et je te proposerai la marche à suivre 
 
 ## Les tutoriels disponibles
 
-- **Brancher Dilaya à ton assistant** — La seule étape à faire une fois : relier ton compte Dilaya à ton assistant, sur ordinateur ou téléphone.  
+- **Brancher Dilaya à ton IA** — La seule étape à faire une fois : relier ton compte Dilaya à ton IA, Claude ou ChatGPT, sur ordinateur ou téléphone.  
   _(demander : the `brancher` tutorial of the `dilaya-guide` skill)_
 - **Découvrir Dilaya** — C'est quoi Dilaya et ce que tu peux faire avec, en une page.  
   _(demander : the `decouvrir` tutorial of the `dilaya-guide` skill)_

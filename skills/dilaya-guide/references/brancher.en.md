@@ -1,45 +1,54 @@
-# Connect Dilaya to your assistant
+# Connect Dilaya to your AI
 
-You drive Dilaya **from your assistant**: you talk to it, and Dilaya gives it the hands to build your software, store your information and put it online. Your software itself runs outside: it has its own address and keeps running once you close the conversation. For that, the two need to be linked **once**. It takes two minutes, and there is nothing to install.
+You drive Dilaya **from your AI**: you talk to it, and Dilaya gives it the hands to build your software, store your information and put it online. Your software itself runs outside: it has its own address and keeps running once you close the conversation. For that, the two need to be linked **once**. It takes two minutes, and there is nothing to install on your computer.
 
-The steps below are **Claude's**, the assistant Dilaya is most used with. Only one thing really matters: the address `https://mcp.dilaya.eu`.
+**Works with Claude and ChatGPT.** You need a subscription to your AI, paid separately: Claude Pro or ChatGPT Plus at least.
 
-## 1. Add Dilaya in Claude
+## In Claude
 
-On a **computer** (claude.ai or the Claude app):
+Dilaya installs as a **plugin**: nothing to copy, nothing to configure.
 
-1. Open the **"Customize"** menu (or "Settings"), then **"Connectors"**.
-2. Click **"Add custom connector"**.
-3. In the address field, paste `https://mcp.dilaya.eu` — leave the other fields empty — and confirm with **"Add"**.
+1. In Claude (claude.ai or the app), open **"Customize"** then **"Plugins"**, search for **Dilaya** and click **"Add"**. You can also get there from the "Connect Dilaya" button of your customer area on dilaya.eu.
+2. In the plugin's **"Connectors"** tab, click **"Connect"** next to Dilaya: the dilaya.eu authorisation page opens (see below).
+3. In Claude's **settings**, at the very bottom, **"Allowed domains"**: choose **"Package managers"** and add `*.dilaya.eu`. In a **Claude Team or Enterprise** organisation, the organisation's owner does this step.
 
-On a **phone**, it is done in the same place. If you cannot find the menu, do it once from a computer: Claude keeps the connection for all your devices.
+On a **phone**, the plugin is in the same place; if you cannot see it, install it once from a computer: it counts for all your devices.
 
-In a **Claude Team or Enterprise** organisation, the organisation's owner adds Dilaya (**Organization settings → Connectors**); after that, each person simply clicks **"Connect"**.
+## In ChatGPT
 
-## 2. Allow access
+Dilaya is added as a **custom MCP server** (ChatGPT Plus at least recommended). Do it from the **browser** or the **desktop app**: the mobile app cannot add a custom MCP server.
 
-Click **"Connect"** next to Dilaya. A **dilaya.eu** page opens:
+1. Open **chatgpt.com/plugins?view=personal&directoryTab=personal** (the Plugins page, **"Personal"** tab), click **"+"** then **"Add custom MCP server"**.
+2. Name: **Dilaya**.
+3. Connection: **Public endpoint** → paste `https://app.dilaya.eu/mcp`.
+4. Authentication is detected on its own: the dilaya.eu authorisation page opens (see below).
+5. Accept the warning (**"I understand and want to continue"**) then **"Create as a plugin"**.
+6. Open a **new conversation** and say: "Use Dilaya's guide tool".
 
-- **Sign in** with the email address of your Dilaya account: you receive a **code by email**, no password to remember.
-- **Choose the workspace** (your workshop) your assistant is allowed to use. If you do not have one yet, the page lets you **create it right there**: a name, an identifier, done.
+## Allow access (the dilaya.eu page)
+
+- **Sign in** with the email address of your Dilaya account: you receive a **code by email**, no password to remember. No account yet? That code creates it.
+- **Tick your organisation** (your workshop): the one whose software your AI may use. If you have several, tick every one you want. No organisation yet? The page lets you **create it right there**: a name, an identifier, done.
 - Click **"Approve"**.
 
 You are back in the conversation: it is connected, and you will not have to do it again.
 
-## 3. Say what you want
+## Say what you want
 
 Open a conversation and talk normally. For example:
 
 > "With Dilaya, I want a notebook to keep track of my customers and their orders."
 
-Your assistant recognises Dilaya and gets to work.
+Your AI recognises Dilaya and gets to work.
 
 ## Frequently asked questions
 
-**Do I need a particular Claude plan?** No: this connection works on Claude's Free, Pro, Max, Team and Enterprise plans (the Free plan accepts only one).
+**Which plan do I need?** Claude Pro or ChatGPT Plus at least. That is a quality recommendation, not a technical limit: below it the connection works, but the AI lacks the mode that lets it carry real work from start to finish.
 
-**An assistant other than Claude?** `https://mcp.dilaya.eu` is a standard **MCP** connector: any assistant that can add one connects the same way, through the same authorisation page. Only the menu names differ.
+**What if I switch AI?** Your software, your data, your files and their instructions stay at Dilaya. Connect your new AI and it picks up where the other one left off. What follows: your software, your data, your files, your sites, your instructions, your Telegram bot and your scheduled automations. What stays tied to Claude: live dashboards (Claude Cowork) and the code agent (Claude Code).
 
-**Several people in the same workspace?** Each person connects Dilaya in **their own** assistant, with **their own** Dilaya account, once invited into the workspace.
+**Another AI?** Any AI that can add an MCP server can connect to Dilaya through the same authorisation page. Ask us for the steps.
 
-**Disconnecting?** In Claude, **"Customize" → "Connectors"**, then **"Remove"** next to Dilaya. Your software and your information stay safe at Dilaya; you can reconnect whenever you like.
+**Several people in the same workspace?** Each person connects Dilaya in **their own** AI, with **their own** Dilaya account, once invited into the workspace.
+
+**Disconnecting?** In Claude: "Customize" → "Plugins", then remove Dilaya. In ChatGPT: the Plugins page, then remove the Dilaya server. Your software and your information stay safe at Dilaya; you can reconnect whenever you like.

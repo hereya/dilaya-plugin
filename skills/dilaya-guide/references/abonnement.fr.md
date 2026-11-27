@@ -22,7 +22,7 @@ Tu reçois un rappel par e-mail **7 jours, 3 jours et 1 jour** avant la fin de l
 
 ## Ajouter des personnes
 
-Des places supplémentaires pour ton équipe s'ajoutent depuis cette même page, une fois la carte enregistrée. Le tarif y est affiché avant que tu valides.
+Une personne de plus doit brancher Dilaya à son IA ? Ajoute sa place depuis cette même page, une fois la carte enregistrée. Le tarif y est affiché avant que tu valides. Ton équipe et tes clients qui se connectent au logiciel n'ont pas besoin de place.
 
 ## En un mot
 

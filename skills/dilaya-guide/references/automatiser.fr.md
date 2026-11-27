@@ -7,6 +7,8 @@ Tu peux confier un travail récurrent à un **assistant automatique** qui s'exé
 - ⏰ **À heure fixe** — « chaque matin à 8 h, prépare un résumé des commandes de la veille et envoie-le-moi ».
 - 🔔 **Quand il y a du nouveau** — un assistant qui réagit dès qu'un message ou un changement arrive (par exemple répondre automatiquement sur Telegram).
 
+Les deux marchent avec Claude comme avec ChatGPT. Un cas à part : l'**agent code**, un assistant qui modifie ton logiciel tout seul depuis un ordinateur, tourne sous **Claude Code**.
+
 ## Exemples d'automatisations
 
 > « Dans Dilaya, chaque lundi, envoie-moi par Telegram le **top 5 des clients** de la semaine. »

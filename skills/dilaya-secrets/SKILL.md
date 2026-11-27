@@ -55,3 +55,13 @@ delete-secret({ schema: "myapp", name: "OPENAI_KEY", confirm: true }) # removes 
 ```
 
 `list-secrets` returns metadata only — it can NEVER return a value. `delete-secret` requires `confirm: true`. Dropping the app removes its secret values too.
+
+## The organization's Claude key
+
+`get-secret-setup-url({ schema, name: "_ANTHROPIC_API_KEY", scope: "org" })` (an owner or admin of the organization; no other name) sets ONE Claude key for the whole organization: `claude.complete` and managed agents use the app's own key first, else this one. `list-secrets` shows `org_key_configured` and `claude_key_source` (`app` / `federation` / `org` / null); `delete-secret({ …, scope: "org", confirm: true })` removes it.
+
+## Claude with no key: identity federation
+
+`get-secret-setup-url({ schema, name: "_ANTHROPIC_FEDERATION", scope: "org" })` (owner or admin) opens a guided page: the user creates a rule in the Claude Console that trusts Dilaya for this organization, then pastes the four ids the Console shows. The page tests the connection live and saves only if it works. There is no key to copy or renew: Dilaya signs a proof of the organization's identity and Claude answers with a token that lasts a few minutes.
+
+The order everywhere is: the app's key, then the federation, then the organization's key. When the federation is set up and fails, the call fails: it never moves on to the organization's key. `list-secrets` shows `org_federation_configured`; `delete-secret({ …, name: "_ANTHROPIC_FEDERATION", scope: "org", confirm: true })` removes it. A refusal has an opaque reason: the Claude Console's authentication history gives the real one.

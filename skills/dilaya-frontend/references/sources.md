@@ -6,9 +6,9 @@ When the frontend outgrows a hand-written `handler.js` + a few files (a real fra
 get-app-sources({ schema: "myapp" })   // says the mode AND hands back what that mode needs
 ```
 
-Its `source_mode` is `"zip"` or `"git"`. **Never try git on a zip-mode app**, and never assume an app has no sources because it has no repo — that is exactly what this field is for.
+Its `source_mode` is `"zip"` or `"git"`. **Never try git on a zip-mode app**, and never assume an app has no sources because it has no repo.
 
-**Zip mode (the default).** The connector fetches the sources server-side and returns a **presigned download URL**; you `curl` + `unzip`, work, rebuild, and ship through the ordinary flow (`get-upload-url` → `deploy-backend`). No git and no GitHub credential ever crosses your network — which is why this mode works in sandboxes whose egress proxy replaces the credentials in a GitHub URL (a clone there fails even with a perfectly valid token). Between sessions, `get-app-sources` returns the **last deployed zip** (every `deploy-backend` archives one — see *Deployment versions* below); before the first deploy, the starter archive the app was created from. `get-app-template-archive({ schema, template })` gets any template as a zip for an app that already exists.
+**Zip mode (the default).** The connector fetches the sources server-side and returns a **presigned download URL**; you `curl` + `unzip`, work, rebuild, and ship through the ordinary flow (`get-upload-url` → `deploy-backend`). No git and no GitHub credential ever crosses your network — so it works in sandboxes whose egress proxy replaces a git URL's credentials (a clone fails there, valid token or not). Between sessions, `get-app-sources` returns the **last deployed zip** (every `deploy-backend` archives one); before the first deploy, the starter archive the app was created from. `get-app-template-archive({ schema, template })` gets any template as a zip for an app that already exists.
 
 **Git mode.** A private repo the platform manages, with a short-lived authenticated remote:
 
@@ -20,8 +20,10 @@ create-app-repo({ schema: "myapp" })                  // 4. only if the probe pa
 get-app-repo({ schema: "myapp" })                     // any later session — fresh URL for the same repo
 ```
 
-**Run the probe BEFORE creating a repo.** It costs one command and creates nothing; skipping it is how an app ends up with a repo its own agent cannot clone. The `remote_url` embeds a token scoped to THIS app's repo only, valid ~1 hour: `git clone`, work, commit, push — then **build locally and deploy the OUTPUT through the normal flow**, the same as zip mode. The repo stores sources; it is never a serving path. Treat the whole URL as a secret (never commit it); when it expires, call `get-app-repo` again. Dropping the app archives the repo (read-only) rather than deleting it. Unavailable deployments return `GITHUB_REPOS_NOT_CONFIGURED`.
+**Run the probe BEFORE creating a repo.** One command, nothing created; skipping it leaves an app with a repo its own agent cannot clone. The `remote_url` embeds a token scoped to THIS app's repo only, valid ~1 hour: `git clone`, work, commit, push — then **build locally and deploy the OUTPUT through the normal flow**, the same as zip mode. The repo stores sources; it is never a serving path. Treat the whole URL as a secret (never commit it); when it expires, call `get-app-repo` again. Dropping the app archives the repo (read-only) rather than deleting it. Unavailable deployments return `GITHUB_REPOS_NOT_CONFIGURED`.
 
-**Switching.** `set-app-source-mode({ schema, mode })` records the choice at any time. It never deletes anything: an app that moves to zip keeps its repo, it simply stops being the recommended path.
+**Switching.** `set-app-source-mode({ schema, mode })` records the choice at any time. It never deletes anything (an app moved to zip keeps its repo).
 
-> **Templates.** The **App templates** section at the top of this topic is the starting point when a frontend needs a real framework/build — prefer `create-app-from-template` over wiring a stack by hand.
+**Apps delivered from Git** (`deploy-backend` answers `GIT_MANAGED_APP`): no zip, see the `dilaya-update-app` skill.
+
+> **Templates.** The **App templates** section is the starting point when a frontend needs a real framework/build — prefer `create-app-from-template` over wiring a stack by hand.
