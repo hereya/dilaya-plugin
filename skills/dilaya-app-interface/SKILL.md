@@ -15,6 +15,8 @@ Tool names below are the Dilaya connector's tools; your client may show them wit
 
 `read-app-interface({ schema })` returns the current files and ops (`which: "draft"` = the unpublished draft). **An interface exists → start from its files, change only what was asked; never redeploy one from scratch.** Read the tables first too (`get-skill` / `describe-schema`).
 
+A big file comes back cut: ask for it alone with `path` (the whole file, text or base64). **With the sandbox tools** (an agent that has `sandbox_pull_interface`): always `sandbox_pull_interface` → edit in place (`sandbox_files` edit / insert / search / read from..to) → `sandbox_render_check` → `sandbox_deploy_interface`; files never pass through the conversation.
+
 ## 2. Deploy
 
 ```
@@ -30,6 +32,8 @@ deploy-app-interface({ schema: "stock",
 - **Files**: `index.html` at the root, at most 200 files and 5 MB, relative paths (letters, digits, `. _ - /`), extensions html js mjs css svg png jpg jpeg gif webp ico woff woff2 json (a JSON file ≤ 64 KB: settings, never data). Scripts are FILES (`<script type="module" src="app.js">`) — **no inline script, no CDN, no fetch**: the frame has no network at all. Bundle every library and font you use.
 - **Ops** (≤ 50, names `^[a-z][a-z0-9_-]{0,39}$`, not `me` / `openLink`): `query` = ONE read-only SELECT; `write` = ONE INSERT / UPDATE / DELETE starting with its verb, an UPDATE or DELETE needs a WHERE. Parameters are named (`:name`), each one declared in `params` and used; never a platform table (`_…`, `sqlite_…`). SQL ≤ 10 000 characters, ≤ 20 params. The SQL lives in the manifest, never in the browser.
 - The answer gives `version`, `status` (`live` or `draft`), `ops`, `write_ops` and a `publish_hint`.
+- Always give `summary`: ONE line (≤ 140) the history shows instead of a version code — « Ajout de l'écran Bons de commande ». A draft's answer carries `draft_link`: give it to the person as a link « Voir le brouillon » (it opens the Interface tab on the draft).
+- **Nothing published is dropped by accident**: a bundle that would remove files or ops of the published version is refused (`UI_WOULD_REMOVE`, with the list). Start again from the published files; give `replace: true` only when the person asked to remove them, or you renamed those files. `which: "draft"` with no draft answers the PUBLISHED version with a `note`.
 
 ## 3. The bridge (the only way the page talks to Dilaya)
 
