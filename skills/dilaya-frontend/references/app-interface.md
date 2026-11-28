@@ -10,6 +10,22 @@
 
 A big file comes back cut: ask for it alone with `path` (the whole file, text or base64). **With the sandbox tools** (an agent that has `sandbox_pull_interface`): always `sandbox_pull_interface` → edit in place (`sandbox_files` edit / insert / search / read from..to) → `sandbox_render_check` → `sandbox_deploy_interface`; files never pass through the conversation.
 
+### Kit Dilaya — the base of every NEW interface
+
+Start every new interface from this (with the sandbox tools, `sandbox_pull_interface` lays it). **Never write, edit or send `kit/`**: index.html links `kit/1.0.0/dilaya.css` + `.js` and `deploy-app-interface` adds them itself. Only the accent changes (`--dy-accent` in app.css).
+```html
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Stock</title><link rel="stylesheet" href="kit/1.0.0/dilaya.css"><link rel="stylesheet" href="app.css"><script type="module" src="app.js"></script></head>
+<body><div class="dy-app"><header class="dy-top"><h1 data-dy-title>Stock</h1><div class="dy-top-actions" data-dy-actions></div></header>
+<nav class="dy-tabs" aria-label="Navigation"><a href="#stock" data-dy-tab><span class="dy-ico" aria-hidden="true">📦</span><span>Stock</span></a></nav>
+<main class="dy-main" data-dy-main></main></div></body></html>
+```
+- `import { router, query, call, h, stat, list, table, field, form, sheet, confirm, toast, pref } from "./kit/1.0.0/dilaya.js"`.
+- `router({ stock: { title: "Stock", render: async (main, args) => node } })`: one entry per tab (`#stock/12` → `["12"]`); title, active tab, loading and errors handled.
+- `await query("products", { q })` → rows as objects; `call("add_move", {…})` writes; errors carry `message`.
+- Blocks: `stat`, `list(rows, r => ({ title, sub, end, onclick }))`, `table(cols, rows)` (cards on a phone), `field`/`form`, `sheet`, `confirm` (never `window.confirm`); classes `dy-card dy-grid dy-stack dy-btn`. Use `h()`, never `innerHTML`.
+- On a kit page `sandbox_render_check` (`interface/index.html#<tab>`) also checks the tabs, the title and 44 px targets. An interface without the kit or on an older one (answer `kit_latest`) stays as it is unless asked.
+
 ### 2. Deploy
 
 ```
@@ -30,20 +46,7 @@ deploy-app-interface({ schema: "stock",
 
 ### 3. The bridge (the only way the page talks to Dilaya)
 
-```js
-let port, next = 0; const waiting = new Map();
-window.addEventListener("message", (e) => {
-  if (e.data?.type !== "dilaya-ui-init" || port) return;
-  port = e.ports[0];
-  port.onmessage = ({ data }) => { const p = waiting.get(data.id); waiting.delete(data.id);
-    data.ok ? p.resolve(data.result) : p.reject(data.error); };
-  start();
-});
-const call = (op, params) => new Promise((resolve, reject) => {
-  const id = ++next; waiting.set(id, { resolve, reject }); port.postMessage({ id, op, params }); });
-// await call("products", { q: "%vis%" }) → { columns, rows, truncated }
-// await call("add_move", { product_id: 3, qty: -2, note: "" }) → { changes, last_insert_rowid }
-```
+With the kit: `query` / `call` / `pref` above. Without it: the protocol is in `deploy-app-interface`'s description (`dilaya-ui-init` → `e.ports[0]` → `{id, op, params}`, with the answers).
 
 - Built-ins: `me` → `{ email, role }`; `openLink` `{ url }` (https only, new tab); `setPref` `{ key, value }` / `getPref` `{ key }` to remember a choice (there is **no** localStorage or cookie); `download` `{ name, content, type? }` for a CSV / JSON / text file (not `<a download>`).
 - An error is `{ code, message }`: show `message` to the person. A query returns at most 1 000 rows; 120 calls and 20 writes per minute; at most 10 calls in flight.
@@ -51,7 +54,7 @@ const call = (op, params) => new Promise((resolve, reject) => {
 
 ### 4. Phone first — the interface must fit a 360 px screen
 
-`<meta name="viewport" content="width=device-width,initial-scale=1">`, `*{box-sizing:border-box}`, `html,body{max-width:100%;overflow-x:hidden}`, no fixed widths (`max-width` and %), long words wrapped (`overflow-wrap:anywhere`), grids that fall to one column under 640 px, buttons ≥ 44 px high. A wide table goes inside `<div style="overflow-x:auto">` — or, better on a phone, becomes a list of cards. Light and dark themes (`prefers-color-scheme`). **No sideways scrolling, ever.**
+The kit does all of this. Without it: the viewport meta, `*{box-sizing:border-box}`, `html,body{max-width:100%;overflow-x:hidden}`, no fixed widths, `overflow-wrap:anywhere`, one column under 640 px, buttons ≥ 44 px, a wide table → cards, light and dark (`prefers-color-scheme`). **No sideways scrolling, ever.**
 
 ### 5. Publication — draft, preview, « Publier pour l'équipe »
 
